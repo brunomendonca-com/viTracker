@@ -5,13 +5,13 @@ import { CgCalendarDates, CgSandClock, CgPlayListCheck } from 'react-icons/cg';
 import { Container, Description, DurationLabel } from './styles';
 
 interface StatusBoxProps {
-  status: 'Planned' | 'In Progress' | 'Completed';
+  status: 'Planned' | 'In-Progress' | 'Completed';
   duration?: number;
 }
 
 const colors = {
   Planned: '#5F8EA0',
-  'In Progress': '#CFA516',
+  'In-Progress': '#CFA516',
   Completed: '#12A454',
 };
 
@@ -23,7 +23,7 @@ const renderIcon = (status: string) => {
           <CgCalendarDates size={24} color={colors[status]} />
         </>
       );
-    case 'In Progress':
+    case 'In-Progress':
       return (
         <>
           <CgSandClock size={20} color={colors[status]} />

@@ -1,14 +1,10 @@
 import styled from 'styled-components';
 
-interface StatusProps {
-  status?: string;
-}
-
 export const Container = styled.div`
   background: white;
   border: 2px solid white;
   border-radius: 8px;
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 16px rgba(0, 54, 68, 0.1);
   cursor: pointer;
   height: 136px;
   margin-right: 32px;
@@ -30,7 +26,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Description = styled.div<StatusProps>`
+export const Description = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;

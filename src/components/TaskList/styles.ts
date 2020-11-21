@@ -17,6 +17,15 @@ export const Container = styled.section`
 
       &:first-child {
         text-align: left;
+        width: 50%;
+      }
+
+      &:nth-last-child(2) {
+        width: 15%;
+      }
+
+      &:last-child {
+        width: 10%;
       }
     }
 
@@ -33,8 +42,7 @@ export const Container = styled.section`
 
       &:last-child {
         border-radius: 0 8px 8px 0;
-        width:96px;
-        background:#fbfbfb;
+        background: #fbfbfb;
       }
 
       h4 {
@@ -42,7 +50,6 @@ export const Container = styled.section`
       }
 
       .buttonGroup {
-        color: #97afb9;
         height: 24px;
         padding-top: 6px;
         display: flex;
@@ -50,32 +57,67 @@ export const Container = styled.section`
         align-items: center;
         justify-content: space-between;
 
-        .saveButton {
-          cursor: pointer;
-          transition: all 250ms ease;
+        button {
+          background: none;
+          border: none;
+          color: #97afb9;
 
-          &:hover {
-            color: #12a454;
-          }
+          transition: all 250ms ease;
         }
 
-        .closeButton {
-          cursor: pointer;
-          transition: all 250ms ease;
-
-          &:hover {
-            color: #e83f5b;
-          }
+        .saveButton:hover {
+          color: #12a454;
         }
 
-        .editButton {
-          cursor: pointer;
-          transition: all 250ms ease;
+        .closeButton:hover {
+          color: #e83f5b;
+        }
 
-        &:hover {
+        .editButton:hover {
           color: #003644;
         }
       }
     }
+  }
+`;
+
+interface StatusButtonProps {
+  state?: string;
+}
+
+export const StatusButton = styled.button`
+  background: ${({ state }: StatusButtonProps) => {
+    switch (state) {
+      case 'Planned':
+        return '#5F8EA0';
+      case 'In-Progress':
+        return '#CFA516';
+      case 'Completed':
+        return '#12a454';
+      default:
+        return '#BDBDBD;';
+    }
+  }};
+
+  border: none;
+  border-radius: 36px;
+  color: white;
+  padding: 8px 16px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  height: 50%;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 300ms ease;
+
+  &:hover {
+    background: #003644;
   }
 `;

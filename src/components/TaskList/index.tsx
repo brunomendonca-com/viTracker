@@ -6,7 +6,7 @@ import {
   RiEditCircleLine,
 } from 'react-icons/ri';
 
-import { Container } from './styles';
+import { Container, StatusButton } from './styles';
 import { Task } from '../../App';
 
 interface TaskListProps {
@@ -27,6 +27,9 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }: TaskListProps) => {
             <th>
               <h5>Status</h5>
             </th>
+            <th>
+              <h5>Actions</h5>
+            </th>
           </tr>
         </thead>
 
@@ -41,21 +44,35 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }: TaskListProps) => {
                 <td>
                   <h4>{Duration.fromMillis(estimate).toFormat('hh:mm')}</h4>
                 </td>
-                <td>{state}</td>
+                <td>
+                  <StatusButton
+                    state={state}
+                    type="button"
+                    onClick={() => {
+                      alert(`Task ID: ${id}, State: ${state}`);
+                    }}
+                  >
+                    {state}
+                  </StatusButton>
+                </td>
 
                 <td>
                   <div className="buttonGroup">
-                    <div className="saveButton">
+                    <button type="button" className="saveButton">
                       <RiCheckboxCircleLine size={24} />
-                    </div>
+                    </button>
 
-                    <div className="closeButton">
+                    <button type="button" className="closeButton">
                       <RiCloseCircleLine size={24} />
-                    </div>
+                    </button>
 
-                    <div className="editButton">
+                    <button
+                      type="button"
+                      className="editButton"
+                      onClick={() => alert(`Task: ${name}, id: ${id}`)}
+                    >
                       <RiEditCircleLine size={24} />
-                    </div>
+                    </button>
                   </div>
                 </td>
               </tr>

@@ -15,7 +15,7 @@ const Header: React.FC = () => {
         </nav>
         <StatusContainer>
           <StatusBox status="Planned" duration={18900000} />
-          <StatusBox status="In Progress" duration={16200000} />
+          <StatusBox status="In-Progress" duration={16200000} />
           <StatusBox status="Completed" duration={7200000} />
         </StatusContainer>
       </header>
