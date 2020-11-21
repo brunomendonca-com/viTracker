@@ -9,18 +9,18 @@ export default createGlobalStyle`
 }
 
 body {
-  background: #3A3A4A;
-  color: #FFF;
+  background: #F1F3F4;
+  color: #5F8EA0;
   -webkit-font-smoothing: antialiased;
 }
 
 body, input, button {
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 16px;
 }
 
 h1, h2, h3, h4, h5, h6, strong {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 button{

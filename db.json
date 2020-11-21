@@ -1,0 +1,32 @@
+{
+  "tasks": [
+    {
+      "name": "Prototyping",
+      "description": "Create UI prototype on Figma",
+      "estimate": 7200000,
+      "state": "Completed",
+      "id": 1
+    },
+    {
+      "name": "Back-end coding",
+      "description": "Develop API with NodeJS and Express",
+      "estimate": 16200000,
+      "state": "In-Progress",
+      "id": 2
+    },
+    {
+      "name": "Front-end coding",
+      "description": "Develop SPA application with ReactJS",
+      "estimate": 14400000,
+      "state": "Planned",
+      "id": 3
+    },
+    {
+      "name": "Deplyoing and Submitting",
+      "description": "Deploy app to netlify and send repository link to Vitruvi",
+      "estimate": 4500000,
+      "state": "Planned",
+      "id": 4
+    }
+  ]
+}
