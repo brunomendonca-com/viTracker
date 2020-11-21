@@ -19,7 +19,7 @@ export const Container = styled.div`
   flex: 1;
   justify-content: space-between;
 
-  transition: all 200ms ease;
+  transition: all 250ms ease;
 
   &:last-child {
     margin-right: 0;
