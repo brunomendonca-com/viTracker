@@ -10,9 +10,9 @@ import { Container, StatusButton } from './styles';
 import { Task } from '../../App';
 
 interface TaskListProps {
-  tasks: Task[];
+  data: Task[];
 }
-const TaskList: React.FC<TaskListProps> = ({ tasks }: TaskListProps) => {
+const TaskList: React.FC<TaskListProps> = ({ data }: TaskListProps) => {
   return (
     <Container>
       <table>
@@ -34,7 +34,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks }: TaskListProps) => {
         </thead>
 
         <tbody>
-          {tasks.map(({ name, description, estimate, state, id }) => {
+          {data.map(({ name, description, estimate, state, id }) => {
             return (
               <tr key={id}>
                 <td>

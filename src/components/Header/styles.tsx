@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.div`
   background: #003644;
   height: 208px;
-  margin-bottom: 32px;
 
   header {
     max-width: 1200px;
@@ -36,11 +35,4 @@ export const Button = styled.button`
   &:hover {
     background: #cfa516;
   }
-`;
-
-export const StatusContainer = styled.div`
-  display: flex;
-  flex: 1;
-  align-items: flex-end;
-  margin-bottom: -32px;
 `;

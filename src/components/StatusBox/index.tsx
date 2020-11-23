@@ -40,15 +40,20 @@ const StatusBox: React.FC<StatusBoxProps> = ({
   status,
   duration,
 }: StatusBoxProps) => {
+  const getParsedDuration = () => {
+    if (duration && duration > 0) {
+      return Duration.fromMillis(duration).toFormat('hh:mm');
+    }
+    return '';
+  };
+
   return (
     <Container>
       <Description>
         <h4 style={{ color: colors[status] }}>{status}</h4>
         {renderIcon(status)}
       </Description>
-      <DurationLabel>
-        {duration && Duration.fromMillis(duration).toFormat('hh:mm')}
-      </DurationLabel>
+      <DurationLabel>{getParsedDuration()}</DurationLabel>
     </Container>
   );
 };

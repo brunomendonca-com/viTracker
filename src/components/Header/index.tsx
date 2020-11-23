@@ -1,23 +1,21 @@
 import React from 'react';
 
-import { Container, Button, StatusContainer } from './styles';
+import { Container, Button } from './styles';
 
 import Logo from '../Logo';
-import StatusBox from '../StatusBox';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onAddNewTask: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onAddNewTask }: HeaderProps) => {
   return (
     <Container>
       <header>
         <nav>
           <Logo />
-          <Button onClick={() => alert('Click')}>Add Task</Button>
+          <Button onClick={() => onAddNewTask()}>Add Task</Button>
         </nav>
-        <StatusContainer>
-          <StatusBox status="Planned" duration={18900000} />
-          <StatusBox status="In-Progress" duration={16200000} />
-          <StatusBox status="Completed" duration={7200000} />
-        </StatusContainer>
       </header>
     </Container>
   );

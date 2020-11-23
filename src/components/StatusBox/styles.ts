@@ -5,7 +5,6 @@ export const Container = styled.div`
   border: 2px solid white;
   border-radius: 8px;
   box-shadow: 0px 0px 16px rgba(0, 54, 68, 0.1);
-  cursor: pointer;
   height: 136px;
   margin-right: 32px;
   padding: 24px 32px 32px;
@@ -21,9 +20,10 @@ export const Container = styled.div`
     margin-right: 0;
   }
 
+  /* cursor: pointer;
   &:hover {
     border: 2px solid #cfa516;
-  }
+  } */
 `;
 
 export const Description = styled.div`
