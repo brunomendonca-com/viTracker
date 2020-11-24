@@ -11,8 +11,12 @@ import { Task } from '../../App';
 
 interface TaskListProps {
   data: Task[];
+  onDeleteTask: (id: number) => void;
 }
-const TaskList: React.FC<TaskListProps> = ({ data }: TaskListProps) => {
+const TaskList: React.FC<TaskListProps> = ({
+  data,
+  onDeleteTask,
+}: TaskListProps) => {
   return (
     <Container>
       <table>
@@ -27,9 +31,6 @@ const TaskList: React.FC<TaskListProps> = ({ data }: TaskListProps) => {
             <th>
               <h5>Status</h5>
             </th>
-            <th>
-              <h5>Actions</h5>
-            </th>
           </tr>
         </thead>
 
@@ -42,37 +43,35 @@ const TaskList: React.FC<TaskListProps> = ({ data }: TaskListProps) => {
                   <p>{description}</p>
                 </td>
                 <td>
-                  <h4>{Duration.fromMillis(estimate).toFormat('hh:mm')}</h4>
+                  <h4>
+                    {Duration.fromMillis(Number(estimate)).toFormat('hh:mm')}
+                  </h4>
                 </td>
                 <td>
-                  <StatusButton
-                    state={state}
-                    type="button"
-                    onClick={() => {
-                      alert(`Task ID: ${id}, State: ${state}`);
-                    }}
-                  >
-                    {state}
-                  </StatusButton>
+                  <StatusButton state={state}>{state}</StatusButton>
                 </td>
 
                 <td>
                   <div className="buttonGroup">
-                    <button type="button" className="saveButton">
+                    {/* <button type="button" className="saveButton">
                       <RiCheckboxCircleLine size={24} />
-                    </button>
+                    </button> */}
 
-                    <button type="button" className="closeButton">
+                    <button
+                      type="button"
+                      className="closeButton"
+                      onClick={() => onDeleteTask(Number(id))}
+                    >
                       <RiCloseCircleLine size={24} />
                     </button>
 
-                    <button
+                    {/* <button
                       type="button"
                       className="editButton"
                       onClick={() => alert(`Task: ${name}, id: ${id}`)}
                     >
                       <RiEditCircleLine size={24} />
-                    </button>
+                    </button> */}
                   </div>
                 </td>
               </tr>

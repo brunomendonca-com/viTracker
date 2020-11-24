@@ -27,20 +27,6 @@
       "estimate": 4500000,
       "state": "Planned",
       "id": 4
-    },
-    {
-      "name": "Bruno Mendonca",
-      "description": "Discovering new careers",
-      "estimate": 3600000,
-      "state": "In-Progress",
-      "id": 5
-    },
-    {
-      "name": "Trail Bottle Depot ",
-      "description": "teste descrptio",
-      "estimate": 1800000,
-      "state": "In-Progress",
-      "id": 6
     }
   ]
 }

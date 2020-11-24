@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface StatusButtonProps {
+  state?: string;
+}
+
 export const Container = styled.section`
   margin: 0 auto;
   max-width: 1200px;
@@ -20,12 +24,7 @@ export const Container = styled.section`
         width: 50%;
       }
 
-      &:nth-last-child(2) {
-        width: 15%;
-      }
-
       &:last-child {
-        width: 10%;
       }
     }
 
@@ -42,7 +41,8 @@ export const Container = styled.section`
 
       &:last-child {
         border-radius: 0 8px 8px 0;
-        background: #fbfbfb;
+        padding: 0;
+        width: 5%;
       }
 
       h4 {
@@ -81,11 +81,7 @@ export const Container = styled.section`
   }
 `;
 
-interface StatusButtonProps {
-  state?: string;
-}
-
-export const StatusButton = styled.button`
+export const StatusButton = styled.div`
   background: ${({ state }: StatusButtonProps) => {
     switch (state) {
       case 'Planned':
@@ -103,7 +99,7 @@ export const StatusButton = styled.button`
   border-radius: 36px;
   color: white;
   padding: 8px 16px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   white-space: nowrap;
@@ -114,10 +110,4 @@ export const StatusButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  transition: all 300ms ease;
-
-  &:hover {
-    background: #003644;
-  }
 `;

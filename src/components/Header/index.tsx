@@ -14,7 +14,9 @@ const Header: React.FC<HeaderProps> = ({ onAddNewTask }: HeaderProps) => {
       <header>
         <nav>
           <Logo />
-          <Button onClick={() => onAddNewTask()}>Add Task</Button>
+          <Button autoFocus onClick={() => onAddNewTask()}>
+            Add Task
+          </Button>
         </nav>
       </header>
     </Container>
