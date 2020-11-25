@@ -6,6 +6,7 @@ import TaskModal from './components/TaskModal';
 import Header from './components/Header';
 import StatusPanel from './components/StatusPanel';
 import TaskList from './components/TaskList';
+import NoTasks from './components/NoTasks';
 
 import GlobalStyle from './styles/global';
 import './styles/transitions.css';
@@ -162,12 +163,15 @@ const App: React.FC = () => {
     <>
       <Header onAddNewTask={handleOpenModal} />
       <StatusPanel data={status} onFilter={handleFilteringMode} />
-      <TaskList
-        data={isFiltering ? filteredTasks : tasks}
-        onClickTask={handleEditingMode}
-        onDeleteTask={handleDeleteTask}
-      />
-
+      {tasks.length === 0 ? (
+        <NoTasks />
+      ) : (
+          <TaskList
+            data={isFiltering ? filteredTasks : tasks}
+            onClickTask={handleEditingMode}
+            onDeleteTask={handleDeleteTask}
+          />
+        )}
       <TaskModal
         visibility={modalVisible}
         editMode={isEditing}
