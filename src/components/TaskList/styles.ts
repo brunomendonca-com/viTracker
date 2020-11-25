@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface StatusButtonProps {
   state?: string;
 }
+
 export const List = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,7 +26,7 @@ export const Header = styled.div`
 
 export const Row = styled.div`
   background-color: #fff;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   border-radius: 8px;
   box-shadow: 0px 0px 16px rgba(0, 54, 68, 0.1);
   padding: 24px 0px;
@@ -61,8 +62,13 @@ export const Row = styled.div`
   }
 
   &:hover {
+    transform: scale(1.01);
     border-color: #cfa516;
     cursor: pointer;
+  }
+
+  &:active {
+    transform: scale(0.99);
   }
 `;
 

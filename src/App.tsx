@@ -9,7 +9,7 @@ import TaskList from './components/TaskList';
 
 import GlobalStyle from './styles/global';
 import './styles/transitions.css';
-import { getScrollBarWidth, getStatusTotalDurations } from './utils';
+import { getScrollBarWidth, getStatusSummary } from './utils';
 
 export interface Task {
   id?: number;
@@ -18,7 +18,7 @@ export interface Task {
   estimate: number;
   state: string;
 }
-export interface Status {
+export interface StatusSummary {
   planned: number;
   inProgress: number;
   completed: number;
@@ -34,7 +34,7 @@ const App: React.FC = () => {
   const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
 
   const [selectedTask, setSelectedTask] = useState<Task>({} as Task);
-  const [status, setStatus] = useState<Status>({} as Status);
+  const [status, setStatus] = useState<StatusSummary>({} as StatusSummary);
 
   useEffect(() => {
     async function loadTasks(): Promise<void> {
@@ -47,7 +47,7 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const statusDurations = getStatusTotalDurations(tasks);
+    const statusDurations = getStatusSummary(tasks);
     setStatus(statusDurations);
   }, [tasks]);
 
@@ -108,7 +108,7 @@ const App: React.FC = () => {
           );
           updatedTasks[updatedIndex] = editedTask;
 
-          const updatedDurations = getStatusTotalDurations(updatedTasks);
+          const updatedDurations = getStatusSummary(updatedTasks);
           setStatus(updatedDurations);
           setTasks(updatedTasks);
           setIsEditing(false);

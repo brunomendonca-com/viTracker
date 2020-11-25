@@ -1,11 +1,11 @@
 /* eslint-disable no-alert */
 import { Duration } from 'luxon';
-import { Status, Task } from '../App';
+import { StatusSummary, Task } from '../App';
 import { newTaskDTO } from '../components/TaskModal';
 
-export const getStatusTotalDurations = (array: Task[]) => {
+export const getStatusSummary = (array: Task[]): StatusSummary => {
   const statusSummary = array.reduce(
-    (accumulator: Status, task: Task) => {
+    (accumulator: StatusSummary, task: Task) => {
       switch (task.state) {
         case 'Planned':
           accumulator.planned += Number(task.estimate);

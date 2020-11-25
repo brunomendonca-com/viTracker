@@ -1,8 +1,13 @@
 import styled from 'styled-components';
+import { colors } from './index';
+
+export interface StateProps {
+  state: 'Planned' | 'In-Progress' | 'Completed';
+}
 
 export const Container = styled.div`
   background: white;
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: 8px;
   box-shadow: 0px 0px 16px rgba(0, 54, 68, 0.1);
   cursor: pointer;
@@ -15,19 +20,23 @@ export const Container = styled.div`
   flex: 1;
   justify-content: space-between;
 
-  transition: all 300ms ease;
+  transition: color 300ms ease, transform 150ms ease;
 
   &:last-child {
     margin-right: 0;
   }
 
   &:hover {
-    border-color: #cfa516;
+    transform: scale(1.02);
+    border-color: ${({ state }: StateProps) => colors[state]};
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 
   &.active-box {
-    border-color: #cfa516;
-    box-shadow: 0px 0px 16px rgba(207, 164, 22, 0.5);
+    border-color: ${({ state }: StateProps) => colors[state]};
   }
 
   @media (max-width: 768px) {
@@ -47,6 +56,7 @@ export const Description = styled.div`
   flex-direction: row;
   justify-content: space-between;
   h4 {
+    color: ${({ state }: StateProps) => colors[state]};
     font-weight: 400;
   }
   @media (max-width: 768px) {

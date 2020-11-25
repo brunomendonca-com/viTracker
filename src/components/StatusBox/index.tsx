@@ -4,15 +4,14 @@ import { Duration } from 'luxon';
 import { CgCalendarDates, CgSandClock, CgPlayListCheck } from 'react-icons/cg';
 import { Container, Description, DurationLabel } from './styles';
 
-type statusName = 'Planned' | 'In-Progress' | 'Completed';
-interface StatusBoxProps {
+export interface StatusBoxProps {
   onBoxClick: (event: MouseEvent<HTMLDivElement>, statusName: string) => void;
   activeStatus: string;
-  statusName: statusName;
+  statusName: 'Planned' | 'In-Progress' | 'Completed';
   duration?: number;
 }
 
-const colors = {
+export const colors = {
   Planned: '#5F8EA0',
   'In-Progress': '#CFA516',
   Completed: '#12A454',
@@ -54,11 +53,12 @@ const StatusBox: React.FC<StatusBoxProps> = ({
 
   return (
     <Container
+      state={statusName}
       className={activeStatus === statusName ? 'active-box' : undefined}
       onClick={event => onBoxClick(event, statusName)}
     >
-      <Description>
-        <h4 style={{ color: colors[statusName] }}>{statusName}</h4>
+      <Description state={statusName}>
+        <h4>{statusName}</h4>
         {renderIcon(statusName)}
       </Description>
       <DurationLabel>{getParsedDuration()}</DurationLabel>
