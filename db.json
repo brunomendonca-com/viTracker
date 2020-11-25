@@ -15,10 +15,10 @@
       "id": 3
     },
     {
-      "name": "Deplyoing and Submitting",
-      "description": "Deploy app to netlify and send repository link to Vitruvi",
-      "estimate": 18000000,
-      "state": "Planned",
+      "name": "Submitting for approval",
+      "description": "Update repo and send link to client",
+      "estimate": 3600000,
+      "state": "In-Progress",
       "id": 4
     },
     {
