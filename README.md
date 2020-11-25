@@ -14,7 +14,7 @@ viTracker is a single page application to manage tasks by estimated duration and
 
 ### Technologies
 
-Technologies that I used to develop this api
+Libraries and frameworks used in this application:
 
 - [ReactJS](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
