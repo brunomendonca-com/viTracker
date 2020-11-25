@@ -3,82 +3,94 @@ import styled from 'styled-components';
 interface StatusButtonProps {
   state?: string;
 }
+export const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 64px;
+`;
+
+export const Header = styled.div`
+  margin-bottom: 16px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    &:first-child {
+      padding-left: 24px;
+    }
+  }
+`;
+
+export const Row = styled.div`
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 16px rgba(0, 54, 68, 0.1);
+  padding: 24px 0px;
+  margin-bottom: 8px;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+
+  transition: all 300ms ease;
+
+  h4 {
+    color: #003644;
+    margin-bottom: 4px;
+  }
+
+  .task-description {
+    margin-left: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .closeButton {
+    background: none;
+    border: none;
+    color: #97afb9;
+
+    transition: all 300ms ease;
+
+    &:hover {
+      color: #e83f5b;
+    }
+  }
+
+  &:hover {
+    border-color: #cfa516;
+    cursor: pointer;
+  }
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex: 3;
+
+  align-items: center;
+  justify-content: center;
+
+  &:first-child {
+    flex: 6;
+    justify-content: flex-start;
+  }
+
+  &:last-child {
+    flex: 1;
+
+    @media (max-width: 768px) {
+      margin-right: 24px;
+    }
+  }
+`;
 
 export const Container = styled.section`
   margin: 0 auto;
   max-width: 1200px;
   padding: 0 40px;
-
-  table {
-    width: 100%;
-    border-spacing: 0 8px;
-
-    th {
-      color: #5f8ea0;
-      font-weight: normal;
-      padding: 80px 32px 8px;
-      text-align: center;
-
-      &:first-child {
-        text-align: left;
-        width: 50%;
-      }
-
-      &:last-child {
-      }
-    }
-
-    td {
-      padding: 24px 32px;
-      border: 0;
-      background: #fff;
-      text-align: center;
-
-      &:first-child {
-        border-radius: 8px 0 0 8px;
-        text-align: left;
-      }
-
-      &:last-child {
-        border-radius: 0 8px 8px 0;
-        padding: 0;
-        width: 5%;
-      }
-
-      h4 {
-        color: #003644;
-      }
-
-      .buttonGroup {
-        height: 24px;
-        padding-top: 6px;
-        display: flex;
-        flex-basis: auto;
-        align-items: center;
-        justify-content: space-between;
-
-        button {
-          background: none;
-          border: none;
-          color: #97afb9;
-
-          transition: all 250ms ease;
-        }
-
-        .saveButton:hover {
-          color: #12a454;
-        }
-
-        .closeButton:hover {
-          color: #e83f5b;
-        }
-
-        .editButton:hover {
-          color: #003644;
-        }
-      }
-    }
-  }
 `;
 
 export const StatusButton = styled.div`
@@ -96,18 +108,23 @@ export const StatusButton = styled.div`
   }};
 
   border: none;
-  border-radius: 36px;
+  border-radius: 16px;
   color: white;
-  padding: 8px 16px;
+
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  white-space: nowrap;
 
-  height: 50%;
-  width: 100%;
+  padding: 8px 16px;
+  width: 96px;
+  white-space: nowrap;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+    width: 75%;
+  }
 `;

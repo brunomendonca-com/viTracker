@@ -9,13 +9,22 @@ export const Background = styled.div`
 
   width: 100%;
   height: 100vh;
+`;
+
+export const Viewport = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
 
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-export const Container = styled.div`
+export const Modal = styled.div`
   background: none;
   border-radius: 16px;
   box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.25);
@@ -28,7 +37,7 @@ export const Container = styled.div`
 
   position: relative;
 
-  .closeModal {
+  .close-button {
     border: none;
     background: none;
 
@@ -134,7 +143,7 @@ export const Form = styled.form`
     margin-left: 8px;
     padding: 16px;
 
-    transition: all 250ms ease;
+    transition: all 300ms ease;
 
     display: flex;
     flex: 1;
@@ -178,27 +187,27 @@ export const Form = styled.form`
       background: none;
       border: 1px solid;
       border-radius: 4px;
-      color: #fff;
       font-size: 14px;
       font-weight: 600;
       padding: 8px 16px;
-      transition: all 250ms ease;
+      transition: all 300ms ease;
 
       &:first-child {
-        border-color: #003644;
-        color: #003644;
+        border-color: #5f8ea0;
+        color: #5f8ea0;
 
         &:focus,
         &:hover {
-          background: #97afb9;
-          border-color: #97afb9;
+          background: #5f8ea0;
+          border-color: #5f8ea0;
           color: #fff;
         }
       }
 
       &:last-child {
-        background: #003644;
-        border-color: #003644;
+        background: #005e65;
+        border-color: #005e65;
+        color: #fff;
         margin-left: 8px;
 
         &:focus,

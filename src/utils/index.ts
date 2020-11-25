@@ -1,3 +1,35 @@
+/* eslint-disable no-alert */
+import { Duration } from 'luxon';
+import { Status, Task } from '../App';
+import { newTaskDTO } from '../components/TaskModal';
+
+export const getStatusTotalDurations = (array: Task[]) => {
+  const statusSummary = array.reduce(
+    (accumulator: Status, task: Task) => {
+      switch (task.state) {
+        case 'Planned':
+          accumulator.planned += Number(task.estimate);
+          break;
+        case 'In-Progress':
+          accumulator.inProgress += Number(task.estimate);
+          break;
+        case 'Completed':
+          accumulator.completed += Number(task.estimate);
+          break;
+        default:
+          break;
+      }
+      return accumulator;
+    },
+    {
+      planned: 0,
+      inProgress: 0,
+      completed: 0,
+    },
+  );
+  return statusSummary;
+};
+
 export const getScrollBarWidth = (): number => {
   const inner = document.createElement('p');
   inner.style.width = '100%';
@@ -22,4 +54,36 @@ export const getScrollBarWidth = (): number => {
   document.body.removeChild(outer);
 
   return w1 - w2;
+};
+
+export const getTaskValidation = (newTask: newTaskDTO): Task | null => {
+  try {
+    const { name, description, hours, minutes, state } = newTask;
+
+    const validateState =
+      state === 'Planned' || state === 'In-Progress' || state === 'Completed';
+    const validateDuration = !hours && !minutes;
+
+    if (!validateState) throw new Error('Please select a valid status.');
+    if (validateDuration)
+      throw new Error('Please insert hours and/or minutes.');
+
+    const durationHours = hours || 0;
+    const durationMinutes = minutes || 0;
+
+    const estimate = Duration.fromObject({
+      hours: durationHours,
+      minutes: durationMinutes,
+    }).as('milliseconds');
+
+    return {
+      name,
+      description,
+      estimate,
+      state,
+    };
+  } catch (error) {
+    alert(error.message);
+    return null;
+  }
 };

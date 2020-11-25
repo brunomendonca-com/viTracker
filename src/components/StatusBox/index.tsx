@@ -1,11 +1,14 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import { Duration } from 'luxon';
 import { CgCalendarDates, CgSandClock, CgPlayListCheck } from 'react-icons/cg';
 import { Container, Description, DurationLabel } from './styles';
 
+type statusName = 'Planned' | 'In-Progress' | 'Completed';
 interface StatusBoxProps {
-  status: 'Planned' | 'In-Progress' | 'Completed';
+  onBoxClick: (event: MouseEvent<HTMLDivElement>, statusName: string) => void;
+  activeStatus: string;
+  statusName: statusName;
   duration?: number;
 }
 
@@ -15,29 +18,31 @@ const colors = {
   Completed: '#12A454',
 };
 
-const renderIcon = (status: string) => {
-  switch (status) {
+const renderIcon = (statusName: string) => {
+  switch (statusName) {
     case 'Planned':
       return (
         <>
-          <CgCalendarDates size={24} color={colors[status]} />
+          <CgCalendarDates size={24} color={colors[statusName]} />
         </>
       );
     case 'In-Progress':
       return (
         <>
-          <CgSandClock size={20} color={colors[status]} />
+          <CgSandClock size={20} color={colors[statusName]} />
         </>
       );
     case 'Completed':
-      return <CgPlayListCheck size={24} color={colors[status]} />;
+      return <CgPlayListCheck size={24} color={colors[statusName]} />;
     default:
       return null;
   }
 };
 
 const StatusBox: React.FC<StatusBoxProps> = ({
-  status,
+  onBoxClick,
+  activeStatus,
+  statusName,
   duration,
 }: StatusBoxProps) => {
   const getParsedDuration = () => {
@@ -48,10 +53,13 @@ const StatusBox: React.FC<StatusBoxProps> = ({
   };
 
   return (
-    <Container>
+    <Container
+      className={activeStatus === statusName ? 'active-box' : undefined}
+      onClick={event => onBoxClick(event, statusName)}
+    >
       <Description>
-        <h4 style={{ color: colors[status] }}>{status}</h4>
-        {renderIcon(status)}
+        <h4 style={{ color: colors[statusName] }}>{statusName}</h4>
+        {renderIcon(statusName)}
       </Description>
       <DurationLabel>{getParsedDuration()}</DurationLabel>
     </Container>

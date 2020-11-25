@@ -1,84 +1,73 @@
 import React from 'react';
 import { Duration } from 'luxon';
-import {
-  RiCheckboxCircleLine,
-  RiCloseCircleLine,
-  RiEditCircleLine,
-} from 'react-icons/ri';
+import { RiCloseCircleLine } from 'react-icons/ri';
 
-import { Container, StatusButton } from './styles';
+import { Container, StatusButton, List, Header, Row, Column } from './styles';
 import { Task } from '../../App';
 
 interface TaskListProps {
   data: Task[];
-  onDeleteTask: (id: number) => void;
+  onClickTask: (task: Task) => void;
+  onDeleteTask: (task: Task) => void;
 }
 const TaskList: React.FC<TaskListProps> = ({
   data,
   onDeleteTask,
+  onClickTask,
 }: TaskListProps) => {
   return (
     <Container>
-      <table>
-        <thead>
-          <tr>
-            <th>
-              <h5>Task</h5>
-            </th>
-            <th>
-              <h5>Estimated Duration</h5>
-            </th>
-            <th>
-              <h5>Status</h5>
-            </th>
-          </tr>
-        </thead>
+      <List>
+        <Header>
+          <Column>
+            <h5>Task</h5>
+          </Column>
 
-        <tbody>
-          {data.map(({ name, description, estimate, state, id }) => {
-            return (
-              <tr key={id}>
-                <td>
-                  <h4>{name}</h4>
-                  <p>{description}</p>
-                </td>
-                <td>
-                  <h4>
-                    {Duration.fromMillis(Number(estimate)).toFormat('hh:mm')}
-                  </h4>
-                </td>
-                <td>
-                  <StatusButton state={state}>{state}</StatusButton>
-                </td>
+          <Column>
+            <h5>Estimated Duration</h5>
+          </Column>
 
-                <td>
-                  <div className="buttonGroup">
-                    {/* <button type="button" className="saveButton">
-                      <RiCheckboxCircleLine size={24} />
-                    </button> */}
+          <Column>
+            <h5>Status</h5>
+          </Column>
 
-                    <button
-                      type="button"
-                      className="closeButton"
-                      onClick={() => onDeleteTask(Number(id))}
-                    >
-                      <RiCloseCircleLine size={24} />
-                    </button>
+          <Column />
+        </Header>
 
-                    {/* <button
-                      type="button"
-                      className="editButton"
-                      onClick={() => alert(`Task: ${name}, id: ${id}`)}
-                    >
-                      <RiEditCircleLine size={24} />
-                    </button> */}
-                  </div>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+        {data.map(task => {
+          const { name, description, estimate, state, id } = task;
+
+          return (
+            <Row key={id} onClick={() => onClickTask(task)}>
+              <Column className="task-description">
+                <h4>{name}</h4>
+                <p>{description}</p>
+              </Column>
+              <Column>
+                <h4>
+                  {Duration.fromMillis(Number(estimate)).toFormat('hh:mm')}
+                </h4>
+              </Column>
+              <Column>
+                <StatusButton state={state}>{state}</StatusButton>
+              </Column>
+
+              <Column>
+                <button
+                  type="button"
+                  className="closeButton"
+                  onClick={event => {
+                    event.stopPropagation();
+                    onDeleteTask(task);
+                  }}
+                >
+                  <RiCloseCircleLine size={24} />
+                </button>
+              </Column>
+            </Row>
+          );
+        })}
+      </List>
     </Container>
   );
 };

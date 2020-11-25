@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useEffect, useState } from 'react';
 import api from './services/api';
 
@@ -7,14 +8,15 @@ import StatusPanel from './components/StatusPanel';
 import TaskList from './components/TaskList';
 
 import GlobalStyle from './styles/global';
-import { getScrollBarWidth } from './utils';
+import './styles/transitions.css';
+import { getScrollBarWidth, getStatusTotalDurations } from './utils';
 
 export interface Task {
   id?: number;
-  name?: string;
-  description?: string;
-  estimate?: number;
-  state?: string;
+  name: string;
+  description: string;
+  estimate: number;
+  state: string;
 }
 export interface Status {
   planned: number;
@@ -24,12 +26,15 @@ export interface Status {
 
 const App: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
+
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [status, setStatus] = useState<Status>({
-    planned: 0,
-    inProgress: 0,
-    completed: 0,
-  });
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+
+  const [isFiltering, setIsFiltering] = useState<string>('');
+  const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
+
+  const [selectedTask, setSelectedTask] = useState<Task>({} as Task);
+  const [status, setStatus] = useState<Status>({} as Status);
 
   useEffect(() => {
     async function loadTasks(): Promise<void> {
@@ -42,31 +47,8 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const statusSum = tasks.reduce(
-      (accumulator: Status, task: Task) => {
-        switch (task.state) {
-          case 'Planned':
-            accumulator.planned += Number(task.estimate);
-            break;
-          case 'In-Progress':
-            accumulator.inProgress += Number(task.estimate);
-            break;
-          case 'Completed':
-            accumulator.completed += Number(task.estimate);
-            break;
-          default:
-            break;
-        }
-        return accumulator;
-      },
-      {
-        planned: 0,
-        inProgress: 0,
-        completed: 0,
-      },
-    );
-
-    setStatus(statusSum);
+    const statusDurations = getStatusTotalDurations(tasks);
+    setStatus(statusDurations);
   }, [tasks]);
 
   const toggleScrollLock = () => {
@@ -92,10 +74,12 @@ const App: React.FC = () => {
 
   const handleCloseModal = () => {
     toggleScrollLock();
+    if (isEditing) setIsEditing(false);
+    if (selectedTask) setSelectedTask({} as Task);
     setModalVisible(false);
   };
 
-  async function handleUpdateTasks(newTask: Task) {
+  async function handleSaveTask(newTask: Task) {
     try {
       const response = await api.post<Task>('/tasks', newTask);
       setTasks([...tasks, response.data]);
@@ -105,29 +89,93 @@ const App: React.FC = () => {
     }
   }
 
-  async function handleDeleteTask(id: number) {
-    try {
-      const response = await api.delete(`/tasks/${id}`);
-      if (response.status === 200) {
-        const updatedTasks = tasks.filter(task => task.id !== id);
-        setTasks(updatedTasks);
-        handleCloseModal();
-      } else {
-        throw new Error('Something went wrong...');
+  async function handleUpdateTask(editedTask: Task) {
+    const editingConfirmed = window.confirm(
+      `Do you really want to edit the task "${editedTask.name}"?`,
+    );
+
+    if (editingConfirmed)
+      try {
+        const response = await api.put<Task>(
+          `/tasks/${editedTask.id}`,
+          editedTask,
+        );
+
+        if (response.status === 200) {
+          const updatedTasks = tasks;
+          const updatedIndex = tasks.findIndex(
+            task => task.id === editedTask.id,
+          );
+          updatedTasks[updatedIndex] = editedTask;
+
+          const updatedDurations = getStatusTotalDurations(updatedTasks);
+          setStatus(updatedDurations);
+          setTasks(updatedTasks);
+          setIsEditing(false);
+          setSelectedTask({} as Task);
+          handleCloseModal();
+        }
+      } catch (err) {
+        alert('Something went wrong.');
       }
-    } catch (error) {
-      alert(error.message);
+  }
+
+  async function handleDeleteTask({ id, name }: Task) {
+    const deletionConfirmed = window.confirm(
+      `Do you really want to delete the task "${name}"?`,
+    );
+
+    if (deletionConfirmed)
+      try {
+        const response = await api.delete(`/tasks/${id}`);
+        if (response.status === 200) {
+          const updatedTasks = tasks.filter(task => task.id !== id);
+          setTasks(updatedTasks);
+        } else {
+          throw new Error('Something went wrong...');
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+  }
+
+  function handleEditingMode(task: Task) {
+    setIsEditing(true);
+    setSelectedTask(task);
+    handleOpenModal();
+  }
+
+  function handleFilteringMode(activeFilterStatus: string) {
+    setIsFiltering(activeFilterStatus);
+    if (activeFilterStatus) {
+      const filterTasks = tasks.filter(
+        task => task.state === activeFilterStatus,
+      );
+      setFilteredTasks(filterTasks);
+    } else {
+      setFilteredTasks([] as Task[]);
+      setIsFiltering('');
     }
   }
 
   return (
     <>
       <Header onAddNewTask={handleOpenModal} />
-      <StatusPanel data={status} />
-      <TaskList data={tasks} onDeleteTask={handleDeleteTask} />
-      {modalVisible && (
-        <TaskModal closeModal={handleCloseModal} saveTask={handleUpdateTasks} />
-      )}
+      <StatusPanel data={status} onFilter={handleFilteringMode} />
+      <TaskList
+        data={isFiltering ? filteredTasks : tasks}
+        onClickTask={handleEditingMode}
+        onDeleteTask={handleDeleteTask}
+      />
+
+      <TaskModal
+        visibility={modalVisible}
+        editMode={isEditing}
+        editData={selectedTask}
+        onCloseModal={handleCloseModal}
+        onSaveTask={handleSaveTask}
+        onEditTask={handleUpdateTask}
+      />
       <GlobalStyle />
     </>
   );

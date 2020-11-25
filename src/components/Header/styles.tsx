@@ -31,7 +31,7 @@ export const Button = styled.button`
   height: 48px;
   padding: 0 16px;
 
-  transition: all 250ms ease;
+  transition: all 300ms ease;
 
   &:hover {
     background: #cfa516;
