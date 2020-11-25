@@ -23,7 +23,7 @@ Technologies that I used to develop this api
 - [Styled Components](https://styled-components.com/)
 - [JSON Server](https://github.com/typicode/json-server)
 - [Axios](https://github.com/axios/axios)
-- [Luxon](https://moment.github.io/luxon/index.html
+- [Luxon](https://moment.github.io/luxon/index.html)
 - [Eslint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
 - [EditorConfig](https://editorconfig.org/)
@@ -66,4 +66,4 @@ $ yarn start
 
 ---
 
-Made with 💜 &nbsp;by Bruno Mendonça 👋 &nbsp;[See my linkedin](https://www.linkedin.com/in/brunomendonca-com/)
+Made with 💖 &nbsp;by Bruno Mendonça ✌ &nbsp;[Check my LinkedIn profile](https://www.linkedin.com/in/brunomendonca-com/)
