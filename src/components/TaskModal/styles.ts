@@ -30,7 +30,7 @@ export const Modal = styled.div`
   box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.25);
   margin: 0 40px;
   max-width: 800px;
-  min-width: 480px;
+  min-width: 360px;
 
   display: flex;
   flex-direction: column;
@@ -65,6 +65,10 @@ export const Form = styled.form`
   flex-direction: column;
   padding: 64px;
 
+  @media (max-width: 768px) {
+    padding: 24px 32px;
+  }
+
   h2,
   h3,
   h4 {
@@ -78,6 +82,11 @@ export const Form = styled.form`
     flex-direction: row;
     align-items: center;
     margin-bottom: 8px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 
   label {
@@ -118,6 +127,11 @@ export const Form = styled.form`
     flex: 1;
     justify-content: space-between;
     margin: 0;
+
+    @media (max-width: 768px) {
+      align-items: center;
+      flex-direction: row;
+    }
   }
 
   .spacing {
@@ -148,6 +162,10 @@ export const Form = styled.form`
     display: flex;
     flex: 1;
 
+    @media (max-width: 768px) {
+      margin: 0;
+    }
+
     &:focus {
       border-color: #cfa516;
     }
@@ -158,10 +176,18 @@ export const Form = styled.form`
 
     &[name='name'] {
       flex: 5;
+      @media (max-width: 768px) {
+        margin-top: 8px;
+        width: 100%;
+      }
     }
 
     &[name='description'] {
       flex: 5;
+      @media (max-width: 768px) {
+        margin-top: 8px;
+        width: 100%;
+      }
     }
 
     &[name='hours'] {
