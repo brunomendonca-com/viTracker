@@ -1,21 +1,5 @@
 # viTracker - Visual Task Tracker
 
-Start mock API:
-```
-npx json-server --watch db.json --port 3333
-```
-
-Before running the application:
-```
-yarn
-```
-
-Run application:
-```
-yarn start
-```
-
-
 ## About the project
 
 viTracker is a single page application to manage tasks by estimated duration and status. 
@@ -35,11 +19,11 @@ Technologies that I used to develop this api
 - [ReactJS](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [React Icons](https://react-icons.netlify.com/#/)
-- [React Transition Group] (http://reactcommunity.org/react-transition-group/)
+- [React Transition Group](http://reactcommunity.org/react-transition-group/)
 - [Styled Components](https://styled-components.com/)
-- [JSON Server] (https://github.com/typicode/json-server)
+- [JSON Server](https://github.com/typicode/json-server)
 - [Axios](https://github.com/axios/axios)
-- [Luxon] (https://moment.github.io/luxon/index.html
+- [Luxon](https://moment.github.io/luxon/index.html
 - [Eslint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
 - [EditorConfig](https://editorconfig.org/)
