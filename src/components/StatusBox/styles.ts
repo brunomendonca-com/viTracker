@@ -9,7 +9,6 @@ export const Container = styled.div`
   background: white;
   border: 2px solid white;
   border-radius: 8px;
-  box-shadow: 0px 0px 16px rgba(0, 54, 68, 0.1);
   cursor: pointer;
   height: 136px;
   margin-right: 32px;
@@ -20,7 +19,7 @@ export const Container = styled.div`
   flex: 1;
   justify-content: space-between;
 
-  transition: color 300ms ease, transform 150ms ease;
+  transition: all 300ms ease;
 
   &:last-child {
     margin-right: 0;
@@ -29,10 +28,12 @@ export const Container = styled.div`
   &:hover {
     transform: scale(1.02);
     border-color: ${({ state }: StateProps) => colors[state]};
+    box-shadow: 0px 0px 16px rgba(0, 54, 68, 0.2);
   }
 
   &:active {
-    transform: scale(0.98);
+    transform: scale(1);
+    box-shadow: none;
   }
 
   &.active-box {

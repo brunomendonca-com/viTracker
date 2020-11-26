@@ -154,6 +154,7 @@ export const Form = styled.form`
   input {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    color: #003644;
     margin-left: 8px;
     padding: 16px;
 

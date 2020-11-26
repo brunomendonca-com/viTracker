@@ -26,9 +26,8 @@ export const Header = styled.div`
 
 export const Row = styled.div`
   background-color: #fff;
-  border: 2px solid #fff;
+  border: 1px solid #fff;
   border-radius: 8px;
-  box-shadow: 0px 0px 16px rgba(0, 54, 68, 0.1);
   padding: 24px 0px;
   margin-bottom: 8px;
   width: 100%;
@@ -37,6 +36,18 @@ export const Row = styled.div`
   justify-content: space-between;
 
   transition: all 300ms ease;
+
+  &:hover {
+    transform: scale(1.01);
+    border-color: #cfa516;
+    box-shadow: 0px 0px 16px rgba(0, 54, 68, 0.2);
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: scale(1);
+    box-shadow: none;
+  }
 
   h4 {
     color: #003644;
@@ -59,16 +70,6 @@ export const Row = styled.div`
     &:hover {
       color: #e83f5b;
     }
-  }
-
-  &:hover {
-    transform: scale(1.01);
-    border-color: #cfa516;
-    cursor: pointer;
-  }
-
-  &:active {
-    transform: scale(0.99);
   }
 `;
 
